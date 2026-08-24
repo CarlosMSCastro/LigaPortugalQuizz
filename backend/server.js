@@ -3,10 +3,13 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 
-// CORS 
+// CORS
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://quizdabola.fun']
+  : ['http://localhost:5173'];
+
 app.use(cors({
-  origin: true,
-  credentials: true,
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
